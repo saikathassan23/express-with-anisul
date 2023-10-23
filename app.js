@@ -5,25 +5,18 @@ const app = express();
 app.use('/api/user/', userRouter);
 
 app.use('/register', (req, res) => {
-  // res.status(200).json({
-  //   message: 'Registration successful',
-  //   statusCode: 200,
-  // });
-  res.statusCode = 201;
-  res.append('success', 'Registration successful');
-  // res.send('Registration ');
-  res.cookie('user', 'shohag hossain');
-
-  res.sendFile(__dirname + '/views/index.html');
+  res.status(200).json({
+    message: 'Registration successful',
+    statusCode: 200,
+  });
 });
 
-// app.use((req, res) => {
-//   res.send('404! Invalid Request');
-// });
-
-app.use('/', (req, res) => {
-  res.clearCookie('user');
-  console.log('clearCookie');
-  res.send('Welcome to express server!');
+app.get('/', (req, res) => {
+  //query bolete url e ?id = 101 die key value  pair akare ja likha hy
+  //more than one pathaite hole & use korbo
+  // const id = req.query.id;
+  // const name = req.query.name;
+  const { id, name } = req.query;
+  res.send(`<h1>${id}</h1>: ${name}`);
 });
 module.exports = app;
